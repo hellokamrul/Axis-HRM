@@ -1,0 +1,6 @@
+@Axis.Api_HostAddress = http://localhost:5228
+
+GET {{Axis.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
