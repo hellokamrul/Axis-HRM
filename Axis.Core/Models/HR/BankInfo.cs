@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace Axis.Core.Models.HR
 {
     public class BankInfo : BaseModel
     {
-        public string BankId { get; set; }
+        //public string BankId { get; set; }
         public string BankName { get; set; }
         public string BankBranch { get; set; }
         public string AccountNumber { get; set; }
@@ -26,6 +27,11 @@ namespace Axis.Core.Models.HR
         public string BankWebsite { get; set; }
         public string BankContactPerson { get; set; }
         public string BankContactPersonPhone { get; set; }
+
+
+        public Employee Employee { get; set; }
+        [ForeignKey("Employee")]
+        public string? EmpId { get; set; }
 
     }
 }

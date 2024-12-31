@@ -1,30 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Axis.Core.Models.HR
+namespace Axis.Core.Models.HouseKeeping
 {
     public class Department : BaseModel
     {
-        [Display(Name = "department code")]
+        [Display(Name = "Department Code")]
         public string DeptCode { get; set; }
 
-        [Display(Name = "department name")]
-        [Required(ErrorMessage = "please provide department name")]
+        [Display(Name = "Department Name")]
+        [Required(ErrorMessage = "Please provide department name")]
         [StringLength(100)]
         [DataType("nvarchar(100)")]
         public string DeptName { get; set; }
 
-        [Display(Name = "department name bangla")]
+        [Display(Name = "Department Local Name")]
         [StringLength(100)]
         [DataType("nvarchar(100)")]
         public string DeptLocalName { get; set; }
 
-        [Display(Name = "sl no")]
+        [Display(Name = "Serial No")]
         public short? slno { get; set; }
 
-        }
+
+        
+    }
 }

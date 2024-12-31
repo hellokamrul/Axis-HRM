@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,5 +20,11 @@ namespace Axis.Core.Models.HR
         public string Region { get; set; } = string.Empty;
         public string PostalCode { get; set; } = string.Empty;
         public string CountryCode { get; set; } = string.Empty;
+
+
+        public Employee Employee { get; set; }
+        [ForeignKey("Employee")]
+        public string? EmpId { get; set; }
+
     }
 }
