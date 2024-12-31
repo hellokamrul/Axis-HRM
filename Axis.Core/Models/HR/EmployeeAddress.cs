@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Axis.Core.Models.HR
 {
-    public class EmployeeAddress
+    public class EmployeeAddress : BaseModel
     {
         public string Street { get; set; } = string.Empty;
         public string City { get; set; } = string.Empty;

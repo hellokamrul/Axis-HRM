@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Axis.Core.Models.HR
 {
-    public class EmployeeFile
+    public class EmployeeFile : BaseModel
     {
         public string FileName { get; set; } = string.Empty; 
         public string FilePath { get; set; } = string.Empty;

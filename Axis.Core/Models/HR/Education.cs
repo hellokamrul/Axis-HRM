@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Axis.Core.Models.HR
 {
-    public class Education
+    public class Education : BaseModel
     {
 
         public string InstitutionName { get; set; } = string.Empty;

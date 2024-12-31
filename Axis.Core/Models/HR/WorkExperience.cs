@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Axis.Core.Models.HR
 {
-    public class WorkExperience
-    {
-        public Guid Id { get; set; }
+    public class WorkExperience : BaseModel
+    {        
         public string CompanyName { get; set; }
         public string JobTitle { get; set; }
         public DateTime StartDate { get; set; }

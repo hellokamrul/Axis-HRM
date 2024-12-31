@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Axis.Core.Models.HR
 {
-    public class JobInformation
+    public class JobInformation : BaseModel
     {
         // Job Information
         public string JobTitle { get; set; } = string.Empty;

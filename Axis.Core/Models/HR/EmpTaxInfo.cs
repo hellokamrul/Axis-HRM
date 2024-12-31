@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Axis.Core.Models.HR
 {
-    public class EmpTaxInfo
+    public class EmpTaxInfo : BaseModel
     {
-        public Guid TaxInfoId { get; set; } 
+        //public Guid TaxInfoId { get; set; } 
         public string EmployeeId { get; set; } = string.Empty;
         public string TaxIdentificationNumber { get; set; } = string.Empty;
         public string SocialSecurityNumber { get; set; } = string.Empty;

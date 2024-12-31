@@ -8,7 +8,7 @@ namespace Axis.Core.Models
 {
     public class Company
     {
-        public Guid ComId { get; set; }
+        public string ComId { get; set; } = new Guid().ToString();
         public string Name { get; set; }
     }
 }

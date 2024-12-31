@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Axis.Core.Models.HR
 {
-    public class EmpCertificate
+    public class EmpCertificate : BaseModel
     {
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
