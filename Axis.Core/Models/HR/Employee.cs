@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -39,8 +40,23 @@ namespace Axis.Core.Models.HR
         public List<string> Certifications { get; set; } = new List<string>();
         public string Notes { get; set; } = string.Empty;
 
-        // Audit Fields
-        public DateTime DateAdded { get; set; } = DateTime.UtcNow;
-        public DateTime DateUpdated { get; set; } = DateTime.UtcNow;
+
+
+       public ICollection<EmployeeFile> EmployeeFiles { get; set; }
+       public ICollection<ContactInfo> ContactInfos { get; set; }
+       public ICollection<FamilyInfo> FamilyInfos { get; set; }
+       public ICollection<EmpTaxInfo> EmpTaxInfos { get; set; }
+       public ICollection<Education> Educations { get; set; }
+       public ICollection<WorkExperience> WorkExperiences { get; set; }
+       public ICollection<JobInformation> JobInformations { get; set; }
+       public ICollection<EmployeeAddress> EmployeeAddresses { get; set; }
+       public ICollection<BankInfo> BankInfos { get; set; }
+       public ICollection<EmpCertificate> EmpCertificates { get; set; }
+
+
+
+
+
+
     }
 }

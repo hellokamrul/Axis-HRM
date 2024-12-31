@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,13 @@ namespace Axis.Core.Models.HR
         public string ContractPeriod { get; set; } = string.Empty;
         public DateTime ContractStartDate { get; set; }
         public DateTime ContractEndDate { get; set; }
-        public string status { get; set; } = string.Empty;  
-              
+        public string status { get; set; } = string.Empty;
+
+
+
+        public Employee Employee { get; set; }
+        [ForeignKey("Employee")]
+        public string? EmpId { get; set; }
+
     }
 }

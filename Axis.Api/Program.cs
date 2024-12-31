@@ -1,11 +1,12 @@
 using Autofac.Core;
 using Autofac;
-using Axis.DataAccess;
-using Axis.DataAccess.Persistence;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 using Autofac.Extensions.DependencyInjection;
+using Axis.DataAccess.Persistence;
+using Axis.DataAccess;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<AxisDbContext>(options =>
-    options.UseNpgsql(connectionString, (x) => x.MigrationsAssembly("Axis.DataAccess")));
+    options.UseNpgsql(connectionString, (x) => x.MigrationsAssembly("Axis.DataAccess")).UseLowerCaseNamingConvention());
 
 // Autofac Integration
 builder.Services.AddControllers().AddControllersAsServices();

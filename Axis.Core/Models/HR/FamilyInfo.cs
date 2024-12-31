@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,8 +19,8 @@ namespace Axis.Core.Models.HR
         public string ContactNumber { get; set; } = string.Empty;
         public string Notes { get; set; } = string.Empty;
 
-        // Audit Fields
-        public DateTime DateAdded { get; set; } = DateTime.UtcNow;
-        public DateTime DateUpdated { get; set; } = DateTime.UtcNow;
+        public Employee Employee { get; set; }
+        [ForeignKey("Employee")]
+        public string? EmpId { get; set; }
     }
 }
