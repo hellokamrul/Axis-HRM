@@ -1,4 +1,5 @@
-﻿using Axis.Core.Models.HR;
+﻿using Axis.Core.Models;
+using Axis.Core.Models.HR;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,12 @@ namespace Axis.DataAccess.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //company
+            modelBuilder.Entity<Company>()
+                .HasKey(c => c.ComId);
+
+
+
             base.OnModelCreating(modelBuilder);
         }
     }

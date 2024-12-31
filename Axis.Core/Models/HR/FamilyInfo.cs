@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Axis.Core.Models.HR
 {
-    public class FamilyInfo
+    public class FamilyInfo : BaseModel
     {
-        public Guid FamilyMemberId { get; set; }
+        //public Guid FamilyMemberId { get; set; }
         public string FullName { get; set; } = string.Empty;
         public DateTime DateOfBirth { get; set; } 
         public string Relationship { get; set; } = string.Empty;

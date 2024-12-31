@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Axis.Core.Models.HR
 {
-    public class BankInfo
+    public class BankInfo : BaseModel
     {
-        public Guid BankId { get; set; }
+        public string BankId { get; set; }
         public string BankName { get; set; }
         public string BankBranch { get; set; }
         public string AccountNumber { get; set; }

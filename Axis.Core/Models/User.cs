@@ -8,5 +8,6 @@ namespace Axis.Core.Models
 {
     public class User
     {
+
     }
 }
