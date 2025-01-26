@@ -6,7 +6,9 @@ using Scalar.AspNetCore;
 using Autofac.Extensions.DependencyInjection;
 using Axis.DataAccess.Persistence;
 using Axis.DataAccess;
-
+using Swashbuckle.AspNetCore.Swagger;
+using Axis.Application;
+using Axis.Application.MappingProfiles;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,21 +25,36 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 {
     containerBuilder.RegisterModule(new DataAccessModule());
+    containerBuilder.RegisterModule(new ApplicationModule());
 });
 
+// Add AutoMapper
+builder.Services.AddAutoMapper(typeof(MappingProfiles));
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapScalarApiReference();
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Axis_API v1");
+        c.RoutePrefix = string.Empty;
+    });
 }
+//if (app.Environment.IsDevelopment())
+//{
+//    app.MapScalarApiReference();
+//    app.MapOpenApi();
+//    app.UseSwagger();
+//    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Your_API_Name v1"));
+//}
 
 app.UseHttpsRedirection();
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Axis.DataAccess.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,9 +13,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Axis.DataAccess.Migrations
 {
     [DbContext(typeof(AxisDbContext))]
-    partial class AxisDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250126083713_add_hr_model")]
+    partial class add_hr_model
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
