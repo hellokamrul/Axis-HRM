@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Axis.DataAccess.IRepository;
+using Axis.DataAccess.Persistence;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +13,19 @@ namespace Axis.DataAccess
     {
         protected readonly DbContext _context;
 
-        public UnitOfWork(DbContext context)
+        #region Repositories
+        public ICompanyRepository Companies { get; private set; }
+
+        #endregion
+        public UnitOfWork(
+            AxisDbContext context,
+            ICompanyRepository companyRepository
+            )
+
+
         {
             _context = context;
+            Companies = companyRepository;
         }
        
         

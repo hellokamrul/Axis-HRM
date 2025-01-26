@@ -32,6 +32,9 @@ namespace Axis.Core.Models
         public ICollection<Unit> Units { get; set; }
         public ICollection<Section> Sections { get; set; }
         public ICollection<Shift> Shifts { get; set; }
+        public ICollection<BloodGroup> BloodGroups { get; set; }
+        public ICollection<Religion> Religions { get; set; }
+        
 
     }
 }
