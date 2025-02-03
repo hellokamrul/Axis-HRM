@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Axis.Application.DTOs;
 using Axis.Core.Models;
+using Axis.Core.Models.HR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Axis.Application.MappingProfiles
         public MappingProfiles()
         {
             CreateMap<CompanyDTO, Company>().ReverseMap();
+            CreateMap<EmployeeDTO, Employee>().ReverseMap();
         }
 
     }

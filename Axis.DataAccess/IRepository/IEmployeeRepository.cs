@@ -1,4 +1,4 @@
-﻿using Axis.Core.Models;
+﻿using Axis.Core.Models.HR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Axis.DataAccess.IRepository
 {
-    public interface ICompanyRepository : IRepository<Company, string>
+    public interface IEmployeeRepository : IRepository<Employee, string>
     {
 
     }

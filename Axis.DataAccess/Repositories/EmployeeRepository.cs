@@ -1,4 +1,4 @@
-﻿using Axis.Core.Models;
+﻿using Axis.Core.Models.HR;
 using Axis.DataAccess.IRepository;
 using Axis.DataAccess.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace Axis.DataAccess.Repositories
 {
-    public class CompanyRepository : BaseRepository<Company, string>, ICompanyRepository
+    public class EmployeeRepository : BaseRepository<Employee, string>, IEmployeeRepository
     {
         private readonly IAxisDbContext _context;
-        public CompanyRepository(IAxisDbContext context) : base((DbContext)(context))
+        public EmployeeRepository(IAxisDbContext context) : base((DbContext)(context))
         {
             _context = context;
         }
-    }
+    }  
 }
