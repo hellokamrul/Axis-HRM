@@ -24,7 +24,7 @@ namespace Axis.DataAccess
 
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
             builder.RegisterType<CompanyRepository>().As<ICompanyRepository>().InstancePerLifetimeScope();
-
+            builder.RegisterType<EmployeeRepository>().As<IEmployeeRepository>().InstancePerLifetimeScope();
 
             base.Load(builder);
         }

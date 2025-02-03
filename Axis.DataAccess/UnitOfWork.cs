@@ -15,17 +15,20 @@ namespace Axis.DataAccess
 
         #region Repositories
         public ICompanyRepository Companies { get; private set; }
+        public IEmployeeRepository Employees { get; private set; }
 
         #endregion
         public UnitOfWork(
-            AxisDbContext context,
-            ICompanyRepository companyRepository
+            DbContext context,
+            ICompanyRepository companyRepository,
+            IEmployeeRepository employeeRepository
             )
 
 
         {
             _context = context;
             Companies = companyRepository;
+            Employees = employeeRepository;
         }
        
         

@@ -10,6 +10,7 @@ namespace Axis.DataAccess
     public interface IUnitOfWork : IDisposable
     {
         ICompanyRepository Companies { get; }
+        IEmployeeRepository Employees { get; }
 
 
         void save();

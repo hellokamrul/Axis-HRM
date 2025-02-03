@@ -10,8 +10,8 @@ namespace Axis.Application.Services.IServices
 {
     public interface ICompanyService
     {
-        Task<Company> AddCompany(CompanyDTO company);
-        Task<Company> UpdateCompany(Company company);
+        Task<bool> AddCompany(CompanyDTO company);
+        Task<Company> UpdateCompany(CompanyDTO company);
         Task<Company> GetCompany(string id);
         Task<IEnumerable<Company>> GetCompanies();
         Task DeleteCompany(string id);

@@ -15,6 +15,7 @@ namespace Axis.Application
         {
            //builder.RegisterType<CompanyService>As<ICompanyService>().Ins;
            builder.RegisterType<CompanyService>().As<ICompanyService>().InstancePerLifetimeScope();
+           builder.RegisterType<EmployeeService>().As<IEmployeeService>().InstancePerLifetimeScope();   
 
             base.Load(builder);
         }

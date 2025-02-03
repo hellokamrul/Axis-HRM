@@ -22,13 +22,15 @@ namespace Axis.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<Company> AddCompany(CompanyDTO company)
+        public async Task<bool> AddCompany(CompanyDTO company)
         {
             try
             {
                 var data = _mapper.Map<Company>(company);
-                await _unitOfWork.Companies.AddAsync(data);
-                return data;
+                data.ComId = Guid.NewGuid().ToString();
+                 _unitOfWork.Companies.Add(data);
+                _unitOfWork.save();
+                return true;
             }
             catch (Exception ex)
             {
@@ -38,24 +40,74 @@ namespace Axis.Application.Services
                
         }
 
-        public Task DeleteCompany(string id)
+        public async Task DeleteCompany(string id)
         {
-            throw new NotImplementedException();
+            var data = _unitOfWork.Companies.GetById(id);
+            try
+            {
+                if (data != null)
+                {
+                    _unitOfWork.Companies.Remove(id);
+                    _unitOfWork.save();                                       
+                }
+            }
+            catch (Exception ex) 
+            { 
+                throw ex;
+            }
         }
 
-        public Task<IEnumerable<Company>> GetCompanies()
+        public async Task<IEnumerable<Company>> GetCompanies()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var data = _unitOfWork.Companies.GetAll();
+                return data;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public Task<Company> GetCompany(string id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var data = _unitOfWork.Companies.GetById(id);
+                return Task.FromResult(data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
         }
 
-        public Task<Company> UpdateCompany(Company company)
+        public async Task<Company> UpdateCompany(CompanyDTO company)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var existingCompany =  _unitOfWork.Companies.GetById(company.Comid);
+                if (existingCompany == null)
+                {
+                    throw new KeyNotFoundException("Company not found.");
+                }
+
+                existingCompany.Name = company.Name;
+               // existingCompany.Address = company.Address;
+               // existingCompany.Phone = company.Phone;
+
+                _unitOfWork.Companies.Edit(existingCompany);
+                _unitOfWork.save();
+
+                return existingCompany;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while updating the company.", ex);
+            }
         }
+
     }
 }

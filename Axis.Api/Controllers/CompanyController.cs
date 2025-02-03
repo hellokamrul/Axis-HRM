@@ -16,15 +16,17 @@ namespace Axis.Api.Controllers
         }
 
         [HttpGet("GetAll")]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> Get()
         {
-            return new string[] { "value1", "value2" };
+            var data = await _companyService.GetCompanies();
+            return Ok(data);
         }
 
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> Get(string id)
         {
-            return "value";
+            var data = await _companyService.GetCompany(id);
+            return Ok(data);
         }
 
         [HttpPost]
@@ -48,14 +50,37 @@ namespace Axis.Api.Controllers
             return BadRequest(ModelState);
         }
 
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("Update")]
+        public async Task<IActionResult> Update([FromBody] CompanyDTO data)
         {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var company = _companyService.UpdateCompany(data);
+                    return Ok(company);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            return BadRequest(ModelState);
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(string id)
         {
+            try
+            {
+                var data = _companyService.DeleteCompany(id);
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                //throw ex;
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
