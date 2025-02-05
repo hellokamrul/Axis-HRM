@@ -15,5 +15,6 @@ namespace Axis.Application.Services.IServices
         Task<EmployeeDTO> GetEmployee(string id);
         Task<IEnumerable<Employee>> GetEmployees(string comid);
         Task<bool> DeleteEmployee(string id);
+       ( IList<Employee> data, int total, int totalDisplay) GetEmployeesByComid(string comid,int pageIndex = 1,int pageSize = 10,bool isTrackingOff = false);
     }
 }

@@ -81,36 +81,80 @@ namespace Axis.Application.Services
         {
             try
             {
-                // Ensure the Employee entity contains a 'CompanyId' property
-                //var result = await _unitOfWork.Employees.GetDynamicAsync(
-                //    filter: e => e.ComId == comid, 
-                //    orderBy: null,                     
-                //    pageIndex: 1,
-                //    pageSize: 100,                     
-                //    isTrackingOff: true
-                //);
-                var result =  _unitOfWork.Employees.GetAll().Where(x => x.ComId == comid).ToList();
-
-                //IList<Employee> employees = result;
-                //int total = result.total; 
-                //int totalDisplay = result.totalDisplay; 
-
-               
+                var result =  _unitOfWork.Employees.GetAll().Where(x => x.ComId == comid).ToList(); 
                 return result;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error retrieving employees: {ex.Message}");
-                return Enumerable.Empty<Employee>(); // Return an empty list in case of failure
+                return Enumerable.Empty<Employee>();
             }
         }
 
 
-        public Task<Employee> UpdateEmployee(EmployeeDTO employee)
+        public async Task<Employee> UpdateEmployee(EmployeeDTO employee)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var empData = _unitOfWork.Employees.GetById(employee.Id);
+
+                if (empData != null)
+                {
+                    // Update existing employee fields
+                   // empData.ComId = employee.ComId;
+                    empData.EmpCode = employee.EmpCode;
+                    empData.FirstName = employee.FirstName;
+                    empData.LastName = employee.LastName;
+                    empData.MiddleName = employee.MiddleName;
+                    empData.Gender = employee.Gender;
+                    empData.DateOfBirth = employee.DateOfBirth;
+                    empData.SocialSecurityNumber = employee.SocialSecurityNumber;
+                    empData.Email = employee.Email;
+                    empData.PhoneNumber = employee.PhoneNumber;
+                    empData.EmergencyContactName = employee.EmergencyContactName;
+                    empData.EmergencyContactRelationship = employee.EmergencyContactRelationship;
+                    empData.EmergencyContactPhone = employee.EmergencyContactPhone;
+                   // empData.IsEligibleForBenefits = employee.IsEligibleForBenefits;
+                    empData.HealthInsuranceProvider = employee.HealthInsuranceProvider;
+                    empData.RetirementPlan = employee.RetirementPlan;
+                    empData.Nationality = employee.Nationality;
+                    empData.MaritalStatus = employee.MaritalStatus;
+                    empData.Skills = employee.Skills;
+                    empData.Certifications = employee.Certifications;
+                    empData.Notes = employee.Notes;
+
+                    _unitOfWork.Employees.Edit(empData);
+                }
+                else
+                {
+                    // If employee does not exist, create a new one
+                    empData = _mapper.Map<Employee>(employee);
+                    _unitOfWork.Employees.Add(empData);
+                }
+
+                // Save changes to the database
+                 _unitOfWork.save();
+
+                return empData;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating employee: {ex.Message}");
+                return null; // Return null in case of an error
+            }
         }
 
-       
+
+        public (IList<Employee> data, int total, int totalDisplay) GetEmployeesByComid(string comid, int pageIndex, int pageSize, bool isTrackingOff = false)
+        {
+            var date = _unitOfWork.Employees.Get(
+                filter: e => e.ComId == comid,
+                orderBy: q => q.OrderBy(e => e.EmpCode),
+                pageIndex: pageIndex,
+                pageSize: pageSize
+            );
+
+            return date;
+        }
     }
 }

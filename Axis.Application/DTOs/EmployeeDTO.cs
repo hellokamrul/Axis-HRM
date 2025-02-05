@@ -10,6 +10,7 @@ namespace Axis.Application.DTOs
     {
         //public Guid EmployeeId { get; set; }
         public string? ComId { get; set; }
+        public string? Id { get; set; }
         public string? EmpCode { get; set; } = string.Empty;
         public string? FirstName { get; set; } = string.Empty;
         public string? LastName { get; set; } = string.Empty;
