@@ -20,7 +20,7 @@ namespace Axis.Api.Controllers
         {
             try
             {
-                var res = _service.AddEmployee(model);
+                var res = await _service.AddEmployee(model);
                 return Ok(res);
             }
             catch (Exception ex)
@@ -35,7 +35,7 @@ namespace Axis.Api.Controllers
         {
             try
             {
-                var data = _service.GetEmployees(Comid);
+                var data = await _service.GetEmployees(Comid);
                 return Ok(data);
             }
             catch (Exception ex)
@@ -43,5 +43,20 @@ namespace Axis.Api.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet("GetEmp")]
+        public IActionResult GetEmployeeList(string comid, int pageIndex = 1, int pageSize = 10)
+        {
+            try
+            {
+                var (data, total, totalDisplay) = _service.GetEmployeesByComid(comid, pageIndex, pageSize);
+                return Ok(new { Employees = data, Total = total, TotalDisplay = totalDisplay });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
+        }
+
     }
 }
