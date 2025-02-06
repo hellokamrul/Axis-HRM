@@ -132,7 +132,7 @@ namespace Axis.Application.Services
                     _unitOfWork.Employees.Add(empData);
                 }
 
-                // Save changes to the database
+              
                  _unitOfWork.save();
 
                 return empData;
@@ -140,7 +140,7 @@ namespace Axis.Application.Services
             catch (Exception ex)
             {
                 Console.WriteLine($"Error updating employee: {ex.Message}");
-                return null; // Return null in case of an error
+                return null;
             }
         }
 
