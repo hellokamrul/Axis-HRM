@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
-using Axis.Application.DTOs;
+using Axis.Application.DTOs.HR;
 using Axis.Application.Services.IServices;
+using Axis.Application.Services.IServices.HR;
 using Axis.Core.Models.HR;
 using Axis.DataAccess;
 using System;

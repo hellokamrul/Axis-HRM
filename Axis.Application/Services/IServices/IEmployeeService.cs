@@ -1,4 +1,4 @@
-﻿using Axis.Application.DTOs;
+﻿using Axis.Application.DTOs.HR;
 using Axis.Core.Models.HR;
 using System;
 using System.Collections.Generic;

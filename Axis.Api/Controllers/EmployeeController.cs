@@ -1,5 +1,6 @@
-﻿using Axis.Application.DTOs;
+﻿using Axis.Application.DTOs.HR;
 using Axis.Application.Services.IServices;
+using Axis.Application.Services.IServices.HR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
