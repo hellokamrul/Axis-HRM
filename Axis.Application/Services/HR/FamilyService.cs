@@ -125,5 +125,19 @@ namespace Axis.Application.Services
             throw new NotImplementedException();
         }
 
+        public async Task<IEnumerable<FamilyInfo>> GetListByEmpId(string empid)
+        {
+            try
+            {
+                var data = _unitOfWork.FamilyInfo.GetAll().Where(x => x.EmpId == empid).ToList();
+                var mappedResult = _mapper.Map<IEnumerable<FamilyInfo>>(data);
+                return mappedResult;
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
     }
 }
