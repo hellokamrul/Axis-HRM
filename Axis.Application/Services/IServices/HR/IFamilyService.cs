@@ -14,6 +14,7 @@ namespace Axis.Application.Services.IServices.HR
         Task<FamilyInfo> Update(FamilyInfoDTO model);
         Task<FamilyInfoDTO> GetById(string id);
         Task<IEnumerable<FamilyInfo>> GetListByComid(string comid);
+        Task<IEnumerable<FamilyInfo>> GetListByEmpId(string empid);
         Task<bool> Delete(string id);
         (IList<FamilyInfo> data, int total, int totalDisplay) GetListWithCount(string comid, int pageIndex = 1, int pageSize = 10, bool isTrackingOff = false);
 
