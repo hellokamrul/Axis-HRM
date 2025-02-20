@@ -30,6 +30,26 @@ namespace Axis.DataAccess
         public IJobInformationRepository JobInformation { get; private set; }
         public IWorkExperienceRepository WorkExperience { get; private set; }
 
+        public IBloodGroupRepository BloodGroups { get; private set; }
+
+        public IDepartmentRepository Departments { get; private set; }
+
+        public IDesignationRepository Designations {get; private set;}
+
+        public IFloorRepository Floors {get; private set;}
+
+        public ISectionRepository Sections {get; private set;}
+
+        public IShiftRepository Shifts {get; private set;}
+
+        public IUnitRepository Units {get; private set;}
+
+        public IReligionRepository Religions {get; private set;}
+
+        public ILineRepository Lines {get; private set;}
+
+        public IGradeRepository Grades {get; private set;}
+
         #endregion
 
 
@@ -47,7 +67,17 @@ namespace Axis.DataAccess
             IEmpTaxInfoRepository empTaxInfoRepository,
             IFamilyInfoRepository familyInfoRepository,
             IJobInformationRepository jobInformationRepository,
-            IWorkExperienceRepository workExperienceRepository
+            IWorkExperienceRepository workExperienceRepository,
+            IBloodGroupRepository bloodGroupRepository,
+            IDepartmentRepository departmentRepository,
+            IDesignationRepository designationRepository,
+            IFloorRepository floorRepository,
+            ISectionRepository sectionRepository,
+            IShiftRepository shiftRepository,
+            IUnitRepository unitRepository,
+            IReligionRepository religionRepository,
+            ILineRepository lineRepository,
+            IGradeRepository gradeRepository
             )
 
 
@@ -65,6 +95,17 @@ namespace Axis.DataAccess
             FamilyInfo = familyInfoRepository;
             JobInformation = jobInformationRepository;
             WorkExperience = workExperienceRepository;
+            BloodGroups = bloodGroupRepository;
+            Departments = departmentRepository;
+            Designations = designationRepository;
+            Floors = floorRepository;
+            Sections = sectionRepository;
+            Shifts = shiftRepository;
+            Units = unitRepository;
+            Religions = religionRepository;
+            Lines = lineRepository;
+            Grades = gradeRepository;
+
 
         }
        

@@ -39,8 +39,23 @@ namespace Axis.DataAccess
             builder.RegisterType<FamilyInfoRepository>().As<IFamilyInfoRepository>().InstancePerLifetimeScope();
             builder.RegisterType<JobInformationRepository>().As<IJobInformationRepository>().InstancePerLifetimeScope();
             builder.RegisterType<WorkExperienceRepository>().As<IWorkExperienceRepository>().InstancePerLifetimeScope();
-            
-            
+
+
+            #endregion
+
+            #region HouseKeeping
+
+            builder.RegisterType<BloodGroupRepository>().As<IBloodGroupRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<DepartmentRepository>().As<IDepartmentRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<DesignationRepository>().As<IDesignationRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<FloorRepository>().As<IFloorRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<GradeRepository>().As<IGradeRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<LineRepository>().As<ILineRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<ReligionRepository>().As<IReligionRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<SectionRepository>().As<ISectionRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<ShiftRepository>().As<IShiftRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<UnitRepository>().As<IUnitRepository>().InstancePerLifetimeScope();
+
             #endregion
 
 
