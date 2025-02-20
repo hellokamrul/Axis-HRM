@@ -27,6 +27,20 @@ namespace Axis.DataAccess
 
 
         #endregion
+
+        #region HouseKeeping Interface
+        IBloodGroupRepository BloodGroups { get; }
+        IDepartmentRepository Departments { get; }
+        IDesignationRepository Designations { get; }
+        IFloorRepository Floors { get; }
+        ISectionRepository Sections { get; }
+        IShiftRepository Shifts { get; }
+        IUnitRepository Units { get; }
+        IReligionRepository Religions { get; }
+        ILineRepository Lines { get; }
+        IGradeRepository Grades { get; }    
+
+        #endregion
         void save();
     }
 }
