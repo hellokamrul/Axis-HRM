@@ -1,7 +1,9 @@
 ﻿using Autofac;
 using Axis.Application.HR.Services;
 using Axis.Application.Services;
+using Axis.Application.Services.HouseKeeping;
 using Axis.Application.Services.IServices;
+using Axis.Application.Services.IServices.HouseKeeping;
 using Axis.Application.Services.IServices.HR;
 using Axis.DataAccess.IRepository;
 using Axis.DataAccess.Repositories;
@@ -36,6 +38,10 @@ namespace Axis.Application
 
             #endregion
 
+            #region HouseKeeping Service
+
+            builder.RegisterType<BloodGroupService>().As<IBloodGroupService>().InstancePerLifetimeScope();
+            #endregion
 
 
 

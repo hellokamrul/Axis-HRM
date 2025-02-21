@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Axis.Application.DTOs;
+using Axis.Application.DTOs.HouseKeeping;
 using Axis.Application.DTOs.HR;
 using Axis.Core.Models;
+using Axis.Core.Models.HouseKeeping;
 using Axis.Core.Models.HR;
 using System;
 using System.Collections.Generic;
@@ -29,6 +31,11 @@ namespace Axis.Application.MappingProfiles
             CreateMap<FamilyInfoDTO, FamilyInfo>().ReverseMap();
             CreateMap<JobInformationDTO, JobInformationDTO>().ReverseMap();
             CreateMap<WorkExperienceDTO, WorkExperience>().ReverseMap();
+
+            #endregion
+
+            #region HouseKeeping Model & DTO
+            CreateMap<BloodGroup,BloodGroupDTO>().ReverseMap();
 
             #endregion
         }
