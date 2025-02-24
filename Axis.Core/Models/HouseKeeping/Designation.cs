@@ -46,7 +46,11 @@ namespace Axis.Core.Models.HouseKeeping
         [Display(Name = "total manpower")]
         public int? proposedmanpower { get; set; }
 
-      
+
+        [ForeignKey(nameof(Department))]
+        public string? DeptId { get; set; }
+        public Department? Department { get; set; }  
+
 
     }
 }

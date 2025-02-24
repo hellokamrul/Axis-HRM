@@ -91,7 +91,16 @@ namespace Axis.Application.HR.Services
 
         public Task<IEnumerable<ContactInfo>> GetListByComid(string comid)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var data = _unitOfWork.ContactInfo.GetAll().Where(x => x.EmpId == comid);
+                return Task.FromResult(data);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
         }
 
         public async Task<bool> Delete(string id)

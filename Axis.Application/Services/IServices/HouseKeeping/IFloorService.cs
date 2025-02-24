@@ -10,13 +10,13 @@ namespace Axis.Application.Services.IServices.HouseKeeping
 {
     public interface IFloorService
     {
-        //Task<bool> Add(DesignationDTO departmentDTO);
-        //Task<Designation> Update(DesignationDTO departmentDTO);
-        //Task<Designation> GetById(string id);
-        //Task<IEnumerable<Designation>> GetListByComid(string id);
-        //Task<IEnumerable<Designation>> GetListByDeptId(string id);
-        //Task<bool> Delete(string id);
-        //(IList<Designation> data, int total, int totalDisplay) GetPaginatedList(string comid, int pageIndex = 1, int pageSize = 10, bool isTrackingOff = false);
+        Task<bool> Add(FloorDTO     floorDTO);
+        Task<Floor> Update(FloorDTO floorDTO);
+        Task<Floor> GetById(string id);
+        Task<IEnumerable<Floor>> GetListByComid(string id);
+       // Task<IEnumerable<Floor>> GetListByDeptId(string id);
+        Task<bool> Delete(string id);
+        (IList<Floor> data, int total, int totalDisplay) GetPaginatedList(string comid, int pageIndex = 1, int pageSize = 10, bool isTrackingOff = false);
 
     }
 }

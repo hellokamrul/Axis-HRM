@@ -27,7 +27,7 @@ namespace Axis.Core.Models.HouseKeeping
         [Display(Name = "Serial No")]
         public short? slno { get; set; }
 
-
+        public ICollection<Designation>? Designations { get; set; }
         
     }
 }
