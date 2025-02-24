@@ -9,6 +9,7 @@ namespace Axis.Application.DTOs.HouseKeeping
 {
     public class ReligionDTO
     {
+        public string? Id { get; set; }  
         public string ReligionName { get; set; }
         public string ReligionLocalName { get; set; }
     }

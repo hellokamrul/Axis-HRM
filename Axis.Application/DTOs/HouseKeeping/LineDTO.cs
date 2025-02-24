@@ -10,9 +10,9 @@ namespace Axis.Application.DTOs.HouseKeeping
 {
     public class LineDTO : BaseDTO
     {
-        public int? lineid { get; set; }
-        public string LineName { get; set; }
-        public string LineLocalName { get; set; }
+       // public int? lineid { get; set; }
+        public string? LineName { get; set; }
+        public string? LineLocalName { get; set; }
 
     }
 }

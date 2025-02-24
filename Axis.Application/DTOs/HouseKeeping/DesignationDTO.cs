@@ -20,5 +20,6 @@ namespace Axis.Application.DTOs.HouseKeeping
         public decimal nightallow { get; set; }
         public int? ttlmanpower { get; set; }
         public int? proposedmanpower { get; set; }
+        public string? DeptId { get; set; }
     }
 }
