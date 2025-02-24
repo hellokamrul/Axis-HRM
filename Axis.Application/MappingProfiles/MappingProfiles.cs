@@ -36,6 +36,15 @@ namespace Axis.Application.MappingProfiles
 
             #region HouseKeeping Model & DTO
             CreateMap<BloodGroup,BloodGroupDTO>().ReverseMap();
+            CreateMap<Designation,DesignationDTO>().ReverseMap();
+            CreateMap<Department,DepartmentDTO>().ReverseMap();
+            CreateMap<Floor,FloorDTO>().ReverseMap();
+            CreateMap<Grade,GradeDTO>().ReverseMap();
+            CreateMap<Line,LineDTO>().ReverseMap();
+            CreateMap<Religion,ReligionDTO>().ReverseMap();
+            CreateMap<Section,SectionDTO>().ReverseMap();
+            CreateMap<Shift,ShiftDTO>().ReverseMap();
+            CreateMap<Unit,UnitDTO>().ReverseMap();
 
             #endregion
         }
