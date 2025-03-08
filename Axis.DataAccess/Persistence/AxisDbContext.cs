@@ -1,6 +1,7 @@
 ﻿using Axis.Core.Models;
 using Axis.Core.Models.HouseKeeping;
 using Axis.Core.Models.HR;
+using Axis.Core.Models.HR.Attendance_Leave;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -44,6 +45,9 @@ namespace Axis.DataAccess.Persistence
         public DbSet<BloodGroup> BloodGroups { get; set; }
         public DbSet<EmpCertificate> EmpCertificates { get; set; }  
         public DbSet<ContactInfo> ContactInfos { get; set; }
+
+        public DbSet<Holiday> Holidays { get; set; }
+        public DbSet<HolidayTemplate> HolidayTemplates { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
