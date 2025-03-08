@@ -24,6 +24,11 @@ namespace Axis.DataAccess
         IJobInformationRepository JobInformation { get; }
         IWorkExperienceRepository WorkExperience { get; }
 
+        //Attendance_Leave
+
+        IHolidayRepository Holidays { get; }
+        IHolidayTemplateRepository HolidayTemplates { get; }
+
 
 
         #endregion

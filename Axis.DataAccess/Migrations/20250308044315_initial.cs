@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -14,7 +13,7 @@ namespace Axis.DataAccess.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "country",
+                name: "countries",
                 columns: table => new
                 {
                     id = table.Column<string>(type: "text", nullable: false),
@@ -26,11 +25,11 @@ namespace Axis.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_country", x => x.id);
+                    table.PrimaryKey("pk_countries", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "company",
+                name: "companies",
                 columns: table => new
                 {
                     comid = table.Column<string>(type: "text", nullable: false),
@@ -39,16 +38,41 @@ namespace Axis.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_company", x => x.comid);
+                    table.PrimaryKey("pk_companies", x => x.comid);
                     table.ForeignKey(
-                        name: "fk_company_country_countryid",
+                        name: "fk_companies_countries_countryid",
                         column: x => x.countryid,
-                        principalTable: "country",
+                        principalTable: "countries",
                         principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "department",
+                name: "bloodgroups",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "text", nullable: false),
+                    bloodname = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
+                    bloodlocalname = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
+                    comid = table.Column<string>(type: "text", nullable: true),
+                    createdbyuserid = table.Column<string>(type: "text", nullable: true),
+                    updatebyuserid = table.Column<string>(type: "text", nullable: true),
+                    isdelete = table.Column<bool>(type: "boolean", nullable: true),
+                    dateadded = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    createdate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    modifieddate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_bloodgroups", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_bloodgroups_companies_comid",
+                        column: x => x.comid,
+                        principalTable: "companies",
+                        principalColumn: "comid");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "departments",
                 columns: table => new
                 {
                     id = table.Column<string>(type: "text", nullable: false),
@@ -66,44 +90,11 @@ namespace Axis.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_department", x => x.id);
+                    table.PrimaryKey("pk_departments", x => x.id);
                     table.ForeignKey(
-                        name: "fk_department_company_comid",
+                        name: "fk_departments_companies_comid",
                         column: x => x.comid,
-                        principalTable: "company",
-                        principalColumn: "comid");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "designation",
-                columns: table => new
-                {
-                    id = table.Column<string>(type: "text", nullable: false),
-                    designame = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    desiglocalname = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    salaryrange = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
-                    slno = table.Column<int>(type: "integer", nullable: true),
-                    gsmin = table.Column<decimal>(type: "numeric(18,2)", nullable: true),
-                    attbonus = table.Column<decimal>(type: "numeric(18,2)", nullable: true),
-                    holidaybonus = table.Column<decimal>(type: "numeric(18,2)", nullable: true),
-                    nightallow = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
-                    ttlmanpower = table.Column<int>(type: "integer", nullable: true),
-                    proposedmanpower = table.Column<int>(type: "integer", nullable: true),
-                    comid = table.Column<string>(type: "text", nullable: true),
-                    createdbyuserid = table.Column<string>(type: "text", nullable: true),
-                    updatebyuserid = table.Column<string>(type: "text", nullable: true),
-                    isdelete = table.Column<bool>(type: "boolean", nullable: true),
-                    dateadded = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    createdate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    modifieddate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_designation", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_designation_company_comid",
-                        column: x => x.comid,
-                        principalTable: "company",
+                        principalTable: "companies",
                         principalColumn: "comid");
                 });
 
@@ -144,14 +135,14 @@ namespace Axis.DataAccess.Migrations
                 {
                     table.PrimaryKey("pk_employees", x => x.id);
                     table.ForeignKey(
-                        name: "fk_employees_company_comid",
+                        name: "fk_employees_companies_comid",
                         column: x => x.comid,
-                        principalTable: "company",
+                        principalTable: "companies",
                         principalColumn: "comid");
                 });
 
             migrationBuilder.CreateTable(
-                name: "floor",
+                name: "floors",
                 columns: table => new
                 {
                     id = table.Column<string>(type: "text", nullable: false),
@@ -167,16 +158,16 @@ namespace Axis.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_floor", x => x.id);
+                    table.PrimaryKey("pk_floors", x => x.id);
                     table.ForeignKey(
-                        name: "fk_floor_company_comid",
+                        name: "fk_floors_companies_comid",
                         column: x => x.comid,
-                        principalTable: "company",
+                        principalTable: "companies",
                         principalColumn: "comid");
                 });
 
             migrationBuilder.CreateTable(
-                name: "grade",
+                name: "grades",
                 columns: table => new
                 {
                     id = table.Column<string>(type: "text", nullable: false),
@@ -197,20 +188,19 @@ namespace Axis.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_grade", x => x.id);
+                    table.PrimaryKey("pk_grades", x => x.id);
                     table.ForeignKey(
-                        name: "fk_grade_company_comid",
+                        name: "fk_grades_companies_comid",
                         column: x => x.comid,
-                        principalTable: "company",
+                        principalTable: "companies",
                         principalColumn: "comid");
                 });
 
             migrationBuilder.CreateTable(
-                name: "line",
+                name: "lines",
                 columns: table => new
                 {
-                    lineid = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    lineid = table.Column<string>(type: "text", nullable: false),
                     linename = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     linelocalname = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     id = table.Column<string>(type: "text", nullable: true),
@@ -224,16 +214,41 @@ namespace Axis.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_line", x => x.lineid);
+                    table.PrimaryKey("pk_lines", x => x.lineid);
                     table.ForeignKey(
-                        name: "fk_line_company_comid",
+                        name: "fk_lines_companies_comid",
                         column: x => x.comid,
-                        principalTable: "company",
+                        principalTable: "companies",
                         principalColumn: "comid");
                 });
 
             migrationBuilder.CreateTable(
-                name: "section",
+                name: "religiones",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "text", nullable: false),
+                    religionname = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    religionlocalname = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    comid = table.Column<string>(type: "text", nullable: true),
+                    createdbyuserid = table.Column<string>(type: "text", nullable: true),
+                    updatebyuserid = table.Column<string>(type: "text", nullable: true),
+                    isdelete = table.Column<bool>(type: "boolean", nullable: true),
+                    dateadded = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    createdate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    modifieddate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_religiones", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_religiones_companies_comid",
+                        column: x => x.comid,
+                        principalTable: "companies",
+                        principalColumn: "comid");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "sections",
                 columns: table => new
                 {
                     id = table.Column<string>(type: "text", nullable: false),
@@ -250,16 +265,16 @@ namespace Axis.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_section", x => x.id);
+                    table.PrimaryKey("pk_sections", x => x.id);
                     table.ForeignKey(
-                        name: "fk_section_company_comid",
+                        name: "fk_sections_companies_comid",
                         column: x => x.comid,
-                        principalTable: "company",
+                        principalTable: "companies",
                         principalColumn: "comid");
                 });
 
             migrationBuilder.CreateTable(
-                name: "shift",
+                name: "shifts",
                 columns: table => new
                 {
                     id = table.Column<string>(type: "text", nullable: false),
@@ -293,16 +308,16 @@ namespace Axis.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_shift", x => x.id);
+                    table.PrimaryKey("pk_shifts", x => x.id);
                     table.ForeignKey(
-                        name: "fk_shift_company_comid",
+                        name: "fk_shifts_companies_comid",
                         column: x => x.comid,
-                        principalTable: "company",
+                        principalTable: "companies",
                         principalColumn: "comid");
                 });
 
             migrationBuilder.CreateTable(
-                name: "unit",
+                name: "units",
                 columns: table => new
                 {
                     id = table.Column<string>(type: "text", nullable: false),
@@ -319,12 +334,51 @@ namespace Axis.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_unit", x => x.id);
+                    table.PrimaryKey("pk_units", x => x.id);
                     table.ForeignKey(
-                        name: "fk_unit_company_comid",
+                        name: "fk_units_companies_comid",
                         column: x => x.comid,
-                        principalTable: "company",
+                        principalTable: "companies",
                         principalColumn: "comid");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "designations",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "text", nullable: false),
+                    designame = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    desiglocalname = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    salaryrange = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
+                    slno = table.Column<int>(type: "integer", nullable: true),
+                    gsmin = table.Column<decimal>(type: "numeric(18,2)", nullable: true),
+                    attbonus = table.Column<decimal>(type: "numeric(18,2)", nullable: true),
+                    holidaybonus = table.Column<decimal>(type: "numeric(18,2)", nullable: true),
+                    nightallow = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
+                    ttlmanpower = table.Column<int>(type: "integer", nullable: true),
+                    proposedmanpower = table.Column<int>(type: "integer", nullable: true),
+                    deptid = table.Column<string>(type: "text", nullable: true),
+                    comid = table.Column<string>(type: "text", nullable: true),
+                    createdbyuserid = table.Column<string>(type: "text", nullable: true),
+                    updatebyuserid = table.Column<string>(type: "text", nullable: true),
+                    isdelete = table.Column<bool>(type: "boolean", nullable: true),
+                    dateadded = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    createdate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    modifieddate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_designations", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_designations_companies_comid",
+                        column: x => x.comid,
+                        principalTable: "companies",
+                        principalColumn: "comid");
+                    table.ForeignKey(
+                        name: "fk_designations_departments_deptid",
+                        column: x => x.deptid,
+                        principalTable: "departments",
+                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
@@ -362,9 +416,9 @@ namespace Axis.DataAccess.Migrations
                 {
                     table.PrimaryKey("pk_bankinfo", x => x.id);
                     table.ForeignKey(
-                        name: "fk_bankinfo_company_comid",
+                        name: "fk_bankinfo_companies_comid",
                         column: x => x.comid,
-                        principalTable: "company",
+                        principalTable: "companies",
                         principalColumn: "comid");
                     table.ForeignKey(
                         name: "fk_bankinfo_employees_empid",
@@ -374,7 +428,7 @@ namespace Axis.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "contactinfo",
+                name: "contactinfos",
                 columns: table => new
                 {
                     id = table.Column<string>(type: "text", nullable: false),
@@ -397,14 +451,14 @@ namespace Axis.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_contactinfo", x => x.id);
+                    table.PrimaryKey("pk_contactinfos", x => x.id);
                     table.ForeignKey(
-                        name: "fk_contactinfo_company_comid",
+                        name: "fk_contactinfos_companies_comid",
                         column: x => x.comid,
-                        principalTable: "company",
+                        principalTable: "companies",
                         principalColumn: "comid");
                     table.ForeignKey(
-                        name: "fk_contactinfo_employees_empid",
+                        name: "fk_contactinfos_employees_empid",
                         column: x => x.empid,
                         principalTable: "employees",
                         principalColumn: "id");
@@ -438,9 +492,9 @@ namespace Axis.DataAccess.Migrations
                 {
                     table.PrimaryKey("pk_educations", x => x.id);
                     table.ForeignKey(
-                        name: "fk_educations_company_comid",
+                        name: "fk_educations_companies_comid",
                         column: x => x.comid,
-                        principalTable: "company",
+                        principalTable: "companies",
                         principalColumn: "comid");
                     table.ForeignKey(
                         name: "fk_educations_employees_empid",
@@ -450,7 +504,7 @@ namespace Axis.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "empcertificate",
+                name: "empcertificates",
                 columns: table => new
                 {
                     id = table.Column<string>(type: "text", nullable: false),
@@ -470,14 +524,14 @@ namespace Axis.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_empcertificate", x => x.id);
+                    table.PrimaryKey("pk_empcertificates", x => x.id);
                     table.ForeignKey(
-                        name: "fk_empcertificate_company_comid",
+                        name: "fk_empcertificates_companies_comid",
                         column: x => x.comid,
-                        principalTable: "company",
+                        principalTable: "companies",
                         principalColumn: "comid");
                     table.ForeignKey(
-                        name: "fk_empcertificate_employees_empid",
+                        name: "fk_empcertificates_employees_empid",
                         column: x => x.empid,
                         principalTable: "employees",
                         principalColumn: "id");
@@ -506,9 +560,9 @@ namespace Axis.DataAccess.Migrations
                 {
                     table.PrimaryKey("pk_employeeaddresses", x => x.id);
                     table.ForeignKey(
-                        name: "fk_employeeaddresses_company_comid",
+                        name: "fk_employeeaddresses_companies_comid",
                         column: x => x.comid,
-                        principalTable: "company",
+                        principalTable: "companies",
                         principalColumn: "comid");
                     table.ForeignKey(
                         name: "fk_employeeaddresses_employees_empid",
@@ -539,9 +593,9 @@ namespace Axis.DataAccess.Migrations
                 {
                     table.PrimaryKey("pk_employeefiles", x => x.id);
                     table.ForeignKey(
-                        name: "fk_employeefiles_company_comid",
+                        name: "fk_employeefiles_companies_comid",
                         column: x => x.comid,
-                        principalTable: "company",
+                        principalTable: "companies",
                         principalColumn: "comid");
                     table.ForeignKey(
                         name: "fk_employeefiles_employees_empid",
@@ -578,9 +632,9 @@ namespace Axis.DataAccess.Migrations
                 {
                     table.PrimaryKey("pk_emptaxinfos", x => x.id);
                     table.ForeignKey(
-                        name: "fk_emptaxinfos_company_comid",
+                        name: "fk_emptaxinfos_companies_comid",
                         column: x => x.comid,
-                        principalTable: "company",
+                        principalTable: "companies",
                         principalColumn: "comid");
                     table.ForeignKey(
                         name: "fk_emptaxinfos_employees_empid",
@@ -615,53 +669,12 @@ namespace Axis.DataAccess.Migrations
                 {
                     table.PrimaryKey("pk_familyinfos", x => x.id);
                     table.ForeignKey(
-                        name: "fk_familyinfos_company_comid",
+                        name: "fk_familyinfos_companies_comid",
                         column: x => x.comid,
-                        principalTable: "company",
+                        principalTable: "companies",
                         principalColumn: "comid");
                     table.ForeignKey(
                         name: "fk_familyinfos_employees_empid",
-                        column: x => x.empid,
-                        principalTable: "employees",
-                        principalColumn: "id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "jobinformations",
-                columns: table => new
-                {
-                    id = table.Column<string>(type: "text", nullable: false),
-                    jobtitle = table.Column<string>(type: "text", nullable: false),
-                    employeeid = table.Column<string>(type: "text", nullable: false),
-                    department = table.Column<string>(type: "text", nullable: false),
-                    dateofhire = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    employmenttype = table.Column<string>(type: "text", nullable: false),
-                    salary = table.Column<decimal>(type: "numeric", nullable: false),
-                    joblocation = table.Column<string>(type: "text", nullable: false),
-                    currency = table.Column<string>(type: "text", nullable: false),
-                    contractperiod = table.Column<string>(type: "text", nullable: false),
-                    contractstartdate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    contractenddate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    status = table.Column<string>(type: "text", nullable: false),
-                    empid = table.Column<string>(type: "text", nullable: true),
-                    comid = table.Column<string>(type: "text", nullable: true),
-                    createdbyuserid = table.Column<string>(type: "text", nullable: true),
-                    updatebyuserid = table.Column<string>(type: "text", nullable: true),
-                    isdelete = table.Column<bool>(type: "boolean", nullable: true),
-                    dateadded = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    createdate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    modifieddate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_jobinformations", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_jobinformations_company_comid",
-                        column: x => x.comid,
-                        principalTable: "company",
-                        principalColumn: "comid");
-                    table.ForeignKey(
-                        name: "fk_jobinformations_employees_empid",
                         column: x => x.empid,
                         principalTable: "employees",
                         principalColumn: "id");
@@ -691,14 +704,103 @@ namespace Axis.DataAccess.Migrations
                 {
                     table.PrimaryKey("pk_workexperiences", x => x.id);
                     table.ForeignKey(
-                        name: "fk_workexperiences_company_comid",
+                        name: "fk_workexperiences_companies_comid",
                         column: x => x.comid,
-                        principalTable: "company",
+                        principalTable: "companies",
                         principalColumn: "comid");
                     table.ForeignKey(
                         name: "fk_workexperiences_employees_empid",
                         column: x => x.empid,
                         principalTable: "employees",
+                        principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "jobinformations",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "text", nullable: false),
+                    jobtitle = table.Column<string>(type: "text", nullable: false),
+                    employeeid = table.Column<string>(type: "text", nullable: false),
+                    deptname = table.Column<string>(type: "text", nullable: false),
+                    dateofhire = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    employmenttype = table.Column<string>(type: "text", nullable: false),
+                    salary = table.Column<decimal>(type: "numeric", nullable: false),
+                    joblocation = table.Column<string>(type: "text", nullable: false),
+                    currency = table.Column<string>(type: "text", nullable: false),
+                    contractperiod = table.Column<string>(type: "text", nullable: false),
+                    contractstartdate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    contractenddate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    status = table.Column<string>(type: "text", nullable: false),
+                    empid = table.Column<string>(type: "text", nullable: true),
+                    desigid = table.Column<string>(type: "text", nullable: true),
+                    deptid = table.Column<string>(type: "text", nullable: true),
+                    secid = table.Column<string>(type: "text", nullable: true),
+                    shiftid = table.Column<string>(type: "text", nullable: true),
+                    gradeid = table.Column<string>(type: "text", nullable: true),
+                    floorid = table.Column<string>(type: "text", nullable: true),
+                    unitid = table.Column<string>(type: "text", nullable: true),
+                    lineid = table.Column<string>(type: "text", nullable: true),
+                    comid = table.Column<string>(type: "text", nullable: true),
+                    createdbyuserid = table.Column<string>(type: "text", nullable: true),
+                    updatebyuserid = table.Column<string>(type: "text", nullable: true),
+                    isdelete = table.Column<bool>(type: "boolean", nullable: true),
+                    dateadded = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    createdate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    modifieddate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_jobinformations", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_jobinformations_companies_comid",
+                        column: x => x.comid,
+                        principalTable: "companies",
+                        principalColumn: "comid");
+                    table.ForeignKey(
+                        name: "fk_jobinformations_departments_deptid",
+                        column: x => x.deptid,
+                        principalTable: "departments",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_jobinformations_designations_desigid",
+                        column: x => x.desigid,
+                        principalTable: "designations",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_jobinformations_employees_empid",
+                        column: x => x.empid,
+                        principalTable: "employees",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_jobinformations_floors_floorid",
+                        column: x => x.floorid,
+                        principalTable: "floors",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_jobinformations_grades_gradeid",
+                        column: x => x.gradeid,
+                        principalTable: "grades",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_jobinformations_lines_lineid",
+                        column: x => x.lineid,
+                        principalTable: "lines",
+                        principalColumn: "lineid");
+                    table.ForeignKey(
+                        name: "fk_jobinformations_sections_secid",
+                        column: x => x.secid,
+                        principalTable: "sections",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_jobinformations_shifts_shiftid",
+                        column: x => x.shiftid,
+                        principalTable: "shifts",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_jobinformations_units_unitid",
+                        column: x => x.unitid,
+                        principalTable: "units",
                         principalColumn: "id");
                 });
 
@@ -713,29 +815,39 @@ namespace Axis.DataAccess.Migrations
                 column: "empid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_company_countryid",
-                table: "company",
+                name: "ix_bloodgroups_comid",
+                table: "bloodgroups",
+                column: "comid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_companies_countryid",
+                table: "companies",
                 column: "countryid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_contactinfo_comid",
-                table: "contactinfo",
+                name: "ix_contactinfos_comid",
+                table: "contactinfos",
                 column: "comid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_contactinfo_empid",
-                table: "contactinfo",
+                name: "ix_contactinfos_empid",
+                table: "contactinfos",
                 column: "empid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_department_comid",
-                table: "department",
+                name: "ix_departments_comid",
+                table: "departments",
                 column: "comid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_designation_comid",
-                table: "designation",
+                name: "ix_designations_comid",
+                table: "designations",
                 column: "comid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_designations_deptid",
+                table: "designations",
+                column: "deptid");
 
             migrationBuilder.CreateIndex(
                 name: "ix_educations_comid",
@@ -748,13 +860,13 @@ namespace Axis.DataAccess.Migrations
                 column: "empid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_empcertificate_comid",
-                table: "empcertificate",
+                name: "ix_empcertificates_comid",
+                table: "empcertificates",
                 column: "comid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_empcertificate_empid",
-                table: "empcertificate",
+                name: "ix_empcertificates_empid",
+                table: "empcertificates",
                 column: "empid");
 
             migrationBuilder.CreateIndex(
@@ -803,13 +915,13 @@ namespace Axis.DataAccess.Migrations
                 column: "empid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_floor_comid",
-                table: "floor",
+                name: "ix_floors_comid",
+                table: "floors",
                 column: "comid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_grade_comid",
-                table: "grade",
+                name: "ix_grades_comid",
+                table: "grades",
                 column: "comid");
 
             migrationBuilder.CreateIndex(
@@ -818,28 +930,73 @@ namespace Axis.DataAccess.Migrations
                 column: "comid");
 
             migrationBuilder.CreateIndex(
+                name: "ix_jobinformations_deptid",
+                table: "jobinformations",
+                column: "deptid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_jobinformations_desigid",
+                table: "jobinformations",
+                column: "desigid");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_jobinformations_empid",
                 table: "jobinformations",
                 column: "empid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_line_comid",
-                table: "line",
+                name: "ix_jobinformations_floorid",
+                table: "jobinformations",
+                column: "floorid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_jobinformations_gradeid",
+                table: "jobinformations",
+                column: "gradeid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_jobinformations_lineid",
+                table: "jobinformations",
+                column: "lineid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_jobinformations_secid",
+                table: "jobinformations",
+                column: "secid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_jobinformations_shiftid",
+                table: "jobinformations",
+                column: "shiftid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_jobinformations_unitid",
+                table: "jobinformations",
+                column: "unitid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_lines_comid",
+                table: "lines",
                 column: "comid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_section_comid",
-                table: "section",
+                name: "ix_religiones_comid",
+                table: "religiones",
                 column: "comid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_shift_comid",
-                table: "shift",
+                name: "ix_sections_comid",
+                table: "sections",
                 column: "comid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_unit_comid",
-                table: "unit",
+                name: "ix_shifts_comid",
+                table: "shifts",
+                column: "comid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_units_comid",
+                table: "units",
                 column: "comid");
 
             migrationBuilder.CreateIndex(
@@ -860,19 +1017,16 @@ namespace Axis.DataAccess.Migrations
                 name: "bankinfo");
 
             migrationBuilder.DropTable(
-                name: "contactinfo");
+                name: "bloodgroups");
 
             migrationBuilder.DropTable(
-                name: "department");
-
-            migrationBuilder.DropTable(
-                name: "designation");
+                name: "contactinfos");
 
             migrationBuilder.DropTable(
                 name: "educations");
 
             migrationBuilder.DropTable(
-                name: "empcertificate");
+                name: "empcertificates");
 
             migrationBuilder.DropTable(
                 name: "employeeaddresses");
@@ -887,37 +1041,46 @@ namespace Axis.DataAccess.Migrations
                 name: "familyinfos");
 
             migrationBuilder.DropTable(
-                name: "floor");
-
-            migrationBuilder.DropTable(
-                name: "grade");
-
-            migrationBuilder.DropTable(
                 name: "jobinformations");
 
             migrationBuilder.DropTable(
-                name: "line");
-
-            migrationBuilder.DropTable(
-                name: "section");
-
-            migrationBuilder.DropTable(
-                name: "shift");
-
-            migrationBuilder.DropTable(
-                name: "unit");
+                name: "religiones");
 
             migrationBuilder.DropTable(
                 name: "workexperiences");
 
             migrationBuilder.DropTable(
+                name: "designations");
+
+            migrationBuilder.DropTable(
+                name: "floors");
+
+            migrationBuilder.DropTable(
+                name: "grades");
+
+            migrationBuilder.DropTable(
+                name: "lines");
+
+            migrationBuilder.DropTable(
+                name: "sections");
+
+            migrationBuilder.DropTable(
+                name: "shifts");
+
+            migrationBuilder.DropTable(
+                name: "units");
+
+            migrationBuilder.DropTable(
                 name: "employees");
 
             migrationBuilder.DropTable(
-                name: "company");
+                name: "departments");
 
             migrationBuilder.DropTable(
-                name: "country");
+                name: "companies");
+
+            migrationBuilder.DropTable(
+                name: "countries");
         }
     }
 }

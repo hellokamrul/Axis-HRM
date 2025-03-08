@@ -12,7 +12,7 @@ namespace Axis.Core.Models.HouseKeeping
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int lineid { get; set; }
+        public string lineid { get; set; }
 
         [Display(Name = "line name")]
         [Required(ErrorMessage = "plz input line name")]
