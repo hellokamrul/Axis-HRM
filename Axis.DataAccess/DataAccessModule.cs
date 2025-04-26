@@ -2,6 +2,7 @@
 using Axis.DataAccess.IRepository;
 using Axis.DataAccess.Persistence;
 using Axis.DataAccess.Repositories;
+using Axis.DataAccess.Repositories.Holiday_Leave;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -55,6 +56,13 @@ namespace Axis.DataAccess
             builder.RegisterType<SectionRepository>().As<ISectionRepository>().InstancePerLifetimeScope();
             builder.RegisterType<ShiftRepository>().As<IShiftRepository>().InstancePerLifetimeScope();
             builder.RegisterType<UnitRepository>().As<IUnitRepository>().InstancePerLifetimeScope();
+
+            #endregion
+
+
+            #region Leave_Holiday
+            builder.RegisterType<HolidayRepository>().As<IHolidayRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<HolidayListRepository>().As<IHolidayListRepository>().InstancePerLifetimeScope();
 
             #endregion
 
