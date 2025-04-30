@@ -43,9 +43,16 @@ namespace Axis.DataAccess
         IUnitRepository Units { get; }
         IReligionRepository Religions { get; }
         ILineRepository Lines { get; }
-        IGradeRepository Grades { get; }    
+        IGradeRepository Grades { get; }
 
         #endregion
+
+        #region Holiday & Leave
+        IHolidayRepository Holidays { get; }
+        IHolidayListRepository HolidayLists { get; }
+
+        #endregion
+
         void save();
     }
 }

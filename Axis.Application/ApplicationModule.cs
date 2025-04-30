@@ -3,8 +3,10 @@ using Axis.Application.HR.Services;
 using Axis.Application.Services;
 using Axis.Application.Services.HouseKeeping;
 using Axis.Application.Services.IServices;
+using Axis.Application.Services.IServices.Holiday_Leave;
 using Axis.Application.Services.IServices.HouseKeeping;
 using Axis.Application.Services.IServices.HR;
+using Axis.Application.Services.Leave_Holiday;
 using Axis.DataAccess.IRepository;
 using Axis.DataAccess.Repositories;
 using System;
@@ -43,7 +45,10 @@ namespace Axis.Application
             builder.RegisterType<BloodGroupService>().As<IBloodGroupService>().InstancePerLifetimeScope();
             #endregion
 
+            #region Holiday & Leave Service
+            builder.RegisterType<HolidayService>().As<IHolidayService>().InstancePerLifetimeScope();
 
+            #endregion
 
             base.Load(builder);
         }

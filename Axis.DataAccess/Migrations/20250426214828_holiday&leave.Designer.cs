@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Axis.DataAccess.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,9 +13,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Axis.DataAccess.Migrations
 {
     [DbContext(typeof(AxisDbContext))]
-    partial class AxisDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250426214828_holiday&leave")]
+    partial class holidayleave
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -988,18 +991,10 @@ namespace Axis.DataAccess.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("dateofhire");
 
-                    b.Property<string>("DeptId")
-                        .HasColumnType("text")
-                        .HasColumnName("deptid");
-
-                    b.Property<string>("DeptName")
+                    b.Property<string>("Department")
                         .IsRequired()
                         .HasColumnType("text")
-                        .HasColumnName("deptname");
-
-                    b.Property<string>("DesigId")
-                        .HasColumnType("text")
-                        .HasColumnName("desigid");
+                        .HasColumnName("department");
 
                     b.Property<string>("EmpId")
                         .HasColumnType("text")
@@ -1015,14 +1010,6 @@ namespace Axis.DataAccess.Migrations
                         .HasColumnType("text")
                         .HasColumnName("employmenttype");
 
-                    b.Property<string>("FloorId")
-                        .HasColumnType("text")
-                        .HasColumnName("floorid");
-
-                    b.Property<string>("GradeId")
-                        .HasColumnType("text")
-                        .HasColumnName("gradeid");
-
                     b.Property<string>("JobLocation")
                         .IsRequired()
                         .HasColumnType("text")
@@ -1033,10 +1020,6 @@ namespace Axis.DataAccess.Migrations
                         .HasColumnType("text")
                         .HasColumnName("jobtitle");
 
-                    b.Property<string>("LineId")
-                        .HasColumnType("text")
-                        .HasColumnName("lineid");
-
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("modifieddate");
@@ -1044,18 +1027,6 @@ namespace Axis.DataAccess.Migrations
                     b.Property<decimal>("Salary")
                         .HasColumnType("numeric")
                         .HasColumnName("salary");
-
-                    b.Property<string>("SecId")
-                        .HasColumnType("text")
-                        .HasColumnName("secid");
-
-                    b.Property<string>("ShiftId")
-                        .HasColumnType("text")
-                        .HasColumnName("shiftid");
-
-                    b.Property<string>("UnitId")
-                        .HasColumnType("text")
-                        .HasColumnName("unitid");
 
                     b.Property<string>("UpdateByUserId")
                         .HasColumnType("text")
@@ -1076,32 +1047,8 @@ namespace Axis.DataAccess.Migrations
                     b.HasIndex("ComId")
                         .HasDatabaseName("ix_jobinformations_comid");
 
-                    b.HasIndex("DeptId")
-                        .HasDatabaseName("ix_jobinformations_deptid");
-
-                    b.HasIndex("DesigId")
-                        .HasDatabaseName("ix_jobinformations_desigid");
-
                     b.HasIndex("EmpId")
                         .HasDatabaseName("ix_jobinformations_empid");
-
-                    b.HasIndex("FloorId")
-                        .HasDatabaseName("ix_jobinformations_floorid");
-
-                    b.HasIndex("GradeId")
-                        .HasDatabaseName("ix_jobinformations_gradeid");
-
-                    b.HasIndex("LineId")
-                        .HasDatabaseName("ix_jobinformations_lineid");
-
-                    b.HasIndex("SecId")
-                        .HasDatabaseName("ix_jobinformations_secid");
-
-                    b.HasIndex("ShiftId")
-                        .HasDatabaseName("ix_jobinformations_shiftid");
-
-                    b.HasIndex("UnitId")
-                        .HasDatabaseName("ix_jobinformations_unitid");
 
                     b.ToTable("jobinformations", (string)null);
                 });
@@ -1532,10 +1479,12 @@ namespace Axis.DataAccess.Migrations
 
             modelBuilder.Entity("Axis.Core.Models.HouseKeeping.Line", b =>
                 {
-                    b.Property<string>("lineid")
+                    b.Property<int>("lineid")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("text")
+                        .HasColumnType("integer")
                         .HasColumnName("lineid");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("lineid"));
 
                     b.Property<string>("ComId")
                         .HasColumnType("text")
@@ -2196,70 +2145,14 @@ namespace Axis.DataAccess.Migrations
                         .HasForeignKey("ComId")
                         .HasConstraintName("fk_jobinformations_companies_comid");
 
-                    b.HasOne("Axis.Core.Models.HouseKeeping.Department", "Department")
-                        .WithMany()
-                        .HasForeignKey("DeptId")
-                        .HasConstraintName("fk_jobinformations_departments_deptid");
-
-                    b.HasOne("Axis.Core.Models.HouseKeeping.Designation", "Designation")
-                        .WithMany()
-                        .HasForeignKey("DesigId")
-                        .HasConstraintName("fk_jobinformations_designations_desigid");
-
                     b.HasOne("Axis.Core.Models.HR.Employee", "Employee")
                         .WithMany("JobInformations")
                         .HasForeignKey("EmpId")
                         .HasConstraintName("fk_jobinformations_employees_empid");
 
-                    b.HasOne("Axis.Core.Models.HouseKeeping.Floor", "Floor")
-                        .WithMany()
-                        .HasForeignKey("FloorId")
-                        .HasConstraintName("fk_jobinformations_floors_floorid");
-
-                    b.HasOne("Axis.Core.Models.HouseKeeping.Grade", "Grade")
-                        .WithMany()
-                        .HasForeignKey("GradeId")
-                        .HasConstraintName("fk_jobinformations_grades_gradeid");
-
-                    b.HasOne("Axis.Core.Models.HouseKeeping.Line", "Line")
-                        .WithMany()
-                        .HasForeignKey("LineId")
-                        .HasConstraintName("fk_jobinformations_lines_lineid");
-
-                    b.HasOne("Axis.Core.Models.HouseKeeping.Section", "Section")
-                        .WithMany()
-                        .HasForeignKey("SecId")
-                        .HasConstraintName("fk_jobinformations_sections_secid");
-
-                    b.HasOne("Axis.Core.Models.HouseKeeping.Shift", "Shift")
-                        .WithMany()
-                        .HasForeignKey("ShiftId")
-                        .HasConstraintName("fk_jobinformations_shifts_shiftid");
-
-                    b.HasOne("Axis.Core.Models.HouseKeeping.Unit", "Unit")
-                        .WithMany()
-                        .HasForeignKey("UnitId")
-                        .HasConstraintName("fk_jobinformations_units_unitid");
-
                     b.Navigation("Company");
 
-                    b.Navigation("Department");
-
-                    b.Navigation("Designation");
-
                     b.Navigation("Employee");
-
-                    b.Navigation("Floor");
-
-                    b.Navigation("Grade");
-
-                    b.Navigation("Line");
-
-                    b.Navigation("Section");
-
-                    b.Navigation("Shift");
-
-                    b.Navigation("Unit");
                 });
 
             modelBuilder.Entity("Axis.Core.Models.HR.WorkExperience", b =>

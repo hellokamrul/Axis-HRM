@@ -41,6 +41,16 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
 
+// Configure Kestrel to listen on both HTTP and HTTPS
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(5228); // HTTP
+    options.ListenAnyIP(7276, listenOptions =>
+    {
+        listenOptions.UseHttps(); // HTTPS
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

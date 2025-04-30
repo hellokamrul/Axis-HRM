@@ -1,6 +1,7 @@
-﻿using Axis.Core.Models;
+using Axis.Core.Models;
 using Axis.Core.Models.HouseKeeping;
 using Axis.Core.Models.HR;
+using Axis.Core.Models.Leave_Holiday;
 using Axis.Core.Models.HR.Attendance_Leave;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -46,7 +47,12 @@ namespace Axis.DataAccess.Persistence
         public DbSet<EmpCertificate> EmpCertificates { get; set; }  
         public DbSet<ContactInfo> ContactInfos { get; set; }
 
+
+        //Holiday & Leave
         public DbSet<Holiday> Holidays { get; set; }
+        public DbSet<HolidayList> HolidayLists { get; set; }
+
+    
         public DbSet<HolidayTemplate> HolidayTemplates { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
