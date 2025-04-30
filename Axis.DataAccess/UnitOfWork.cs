@@ -50,6 +50,11 @@ namespace Axis.DataAccess
 
         public IGradeRepository Grades {get; private set;}
 
+        //Attendance_Leave
+
+        public IHolidayRepository Holidays { get; private set; }
+        public IHolidayTemplateRepository HolidayTemplates { get; private set; }
+
         #endregion
 
         #region Holiday & Leave
@@ -83,7 +88,10 @@ namespace Axis.DataAccess
             ILineRepository lineRepository,
             IGradeRepository gradeRepository,
             IHolidayRepository holidayRepository,
-            IHolidayListRepository holidayListRepository
+            IHolidayListRepository holidayListRepository,
+
+            IHolidayTemplateRepository holidayTemplateRepository
+
             )
 
 
@@ -113,6 +121,9 @@ namespace Axis.DataAccess
             Grades = gradeRepository;
             Holidays = holidayRepository;
             HolidayLists = holidayListRepository;
+
+            HolidayTemplates = holidayTemplateRepository;
+
 
 
         }

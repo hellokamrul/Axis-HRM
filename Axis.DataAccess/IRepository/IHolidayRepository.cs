@@ -1,4 +1,4 @@
-﻿using Axis.Core.Models.Leave_Holiday;
+using Axis.Core.Models.Leave_Holiday;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +10,13 @@ namespace Axis.DataAccess.IRepository
     public interface IHolidayRepository : IRepository<Holiday,string>
     {
 
+
+using Axis.Core.Models.HR.Attendance_Leave;
+
+namespace Axis.DataAccess.IRepository
+{
+    public interface IHolidayRepository : IRepository<Holiday, string>
+    {
 
     }
 }

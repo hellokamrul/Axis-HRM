@@ -41,6 +41,11 @@ namespace Axis.DataAccess
             builder.RegisterType<JobInformationRepository>().As<IJobInformationRepository>().InstancePerLifetimeScope();
             builder.RegisterType<WorkExperienceRepository>().As<IWorkExperienceRepository>().InstancePerLifetimeScope();
 
+            //Attandance_Leave
+
+            builder.RegisterType<HolidayRepository>().As<IHolidayRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<HolidayTemplateRepository>().As<IHolidayTemplateRepository>().InstancePerLifetimeScope();
+
 
             #endregion
 
