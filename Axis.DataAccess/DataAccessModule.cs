@@ -63,6 +63,7 @@ namespace Axis.DataAccess
             #region Leave_Holiday
             builder.RegisterType<HolidayRepository>().As<IHolidayRepository>().InstancePerLifetimeScope();
             builder.RegisterType<HolidayListRepository>().As<IHolidayListRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<LeaveComponentRepository>().As<ILeaveComponent>().InstancePerLifetimeScope();
 
             #endregion
 

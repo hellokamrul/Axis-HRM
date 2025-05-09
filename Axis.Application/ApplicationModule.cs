@@ -47,6 +47,7 @@ namespace Axis.Application
 
             #region Holiday & Leave Service
             builder.RegisterType<HolidayService>().As<IHolidayService>().InstancePerLifetimeScope();
+            builder.RegisterType<LeaveComponentService>().As<ILeaveComponentServe>().InstancePerLifetimeScope();
 
             #endregion
 

@@ -45,6 +45,7 @@ namespace Axis.DataAccess.Persistence
         //Holiday & Leave
         public DbSet<Holiday> Holidays { get; set; }
         public DbSet<HolidayList> HolidayLists { get; set; }
+        public DbSet<LeaveComponent> LeaveComponents { get; set; }
 
 
     }

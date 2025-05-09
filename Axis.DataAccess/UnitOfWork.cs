@@ -55,6 +55,7 @@ namespace Axis.DataAccess
         #region Holiday & Leave
         public IHolidayRepository Holidays { get; private set; }
         public IHolidayListRepository HolidayLists { get; private set; }
+        public ILeaveComponent LeaveComponent { get; private set; }
         #endregion
 
         #endregion
@@ -83,7 +84,8 @@ namespace Axis.DataAccess
             ILineRepository lineRepository,
             IGradeRepository gradeRepository,
             IHolidayRepository holidayRepository,
-            IHolidayListRepository holidayListRepository
+            IHolidayListRepository holidayListRepository,
+            ILeaveComponent leaveComponent
             )
 
 
@@ -113,6 +115,7 @@ namespace Axis.DataAccess
             Grades = gradeRepository;
             Holidays = holidayRepository;
             HolidayLists = holidayListRepository;
+            LeaveComponent = leaveComponent;
 
 
         }

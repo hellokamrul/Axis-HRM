@@ -101,6 +101,19 @@ namespace Axis.Application.MappingProfiles
                 .ForMember(d => d.TotalHolidays, opt => opt.Ignore())
                 .ForMember(d => d.Status, opt => opt.Ignore());
 
+
+            //Leave Component
+            CreateMap<LeaveComponentDTO, LeaveComponent>().ReverseMap();
+            //CreateMap<LeaveComponent, LeaveComponentDTO>()
+            //    .ForMember(dest => dest.IsCarryForward, opt => opt.MapFrom(src => src.IsCarryForward))
+            //    .ForMember(dest => dest.IsEncashment, opt => opt.MapFrom(src => src.IsEncashment))
+            //    .ForMember(dest => dest.IsEarnedLeave, opt => opt.MapFrom(src => src.IsEarnedLeave))
+            //    .ForMember(dest => dest.IsWithoutPay, opt => opt.MapFrom(src => src.IsWithoutPay))
+            //    .ForMember(dest => dest.IsOptional, opt => opt.MapFrom(src => src.IsOptional))
+            //    .ForMember(dest => dest.IsPartiallyPaid, opt => opt.MapFrom(src => src.IsPartiallyPaid));
+           
+            CreateMap<LeaveComponent, LeaveComponentDTO>().ReverseMap();
+
             #endregion
         }
 

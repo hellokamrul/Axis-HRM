@@ -45,6 +45,7 @@ namespace Axis.DataAccess
         #region Holiday & Leave
         IHolidayRepository Holidays { get; }
         IHolidayListRepository HolidayLists { get; }
+        ILeaveComponent LeaveComponent { get; }
 
         #endregion
 
